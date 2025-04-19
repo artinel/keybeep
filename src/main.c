@@ -1,7 +1,6 @@
 #include "events.h"
 
 #define INPUT_DEV "/dev/input/event2"
-#define DEBUG 0
 
 
 int main(int argc, char** argv){
