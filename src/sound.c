@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
+#define MUSIC_PATH "../beep.mp3"
 
 short sound_init(){
 	if(SDL_Init(SDL_INIT_AUDIO) < 0){
@@ -19,4 +20,11 @@ short sound_init(){
 	}
 
 	return 0;
+}
+
+void sound_play(){
+	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	Mix_Music* music = Mix_LoadMUS(MUSIC_PATH);
+	Mix_PlayMusic(music, 1);
+//	Mix_FreeMusic(music);	
 }

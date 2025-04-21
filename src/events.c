@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "events.h"
+#include "sound.h"
 
 #define DEBUG 0
 
@@ -51,6 +52,7 @@ void events_listen(const char* event_file){
 								input_data->code,
 								input_data->value);
 					}
+					sound_play();
 					memset(input_data, 0, input_size);
 				}
 			}else{
