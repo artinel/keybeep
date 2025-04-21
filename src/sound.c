@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
+#include <pthread.h>
 
 #define MUSIC_PATH "../beep.mp3"
 
@@ -22,9 +23,15 @@ short sound_init(){
 	return 0;
 }
 
-void sound_play(){
+static void* sound_play_thread(void* arg){
 	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
 	Mix_Music* music = Mix_LoadMUS(MUSIC_PATH);
 	Mix_PlayMusic(music, 1);
-//	Mix_FreeMusic(music);	
+	return NULL;
+}
+
+void sound_play(){
+	pthread_t thread;
+	pthread_create(&thread, NULL, sound_play_thread, NULL);
+	pthread_join(thread, NULL);
 }
